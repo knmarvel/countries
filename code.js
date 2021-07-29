@@ -8,22 +8,43 @@ document.body.append(main)
 const countryDiv = document.createElement("div")
 countryDiv.classList.add("countryDiv")
 
-
 const countryList = document.createElement("ul")
 countryDiv.append(countryList)
 
 
 const displayCountry = function (country){
     const li = document.createElement("li")
+    const card = document.createElement("div")
+    card.classList.add("card")
     // add country name to list
-    li.innerHTML = country.name
+    li.append(card)
     countryList.append(li)
+
+    const countryName = document.createElement("h4")
+    countryName.innerHTML = country.name
+    card.append(countryName)
 
     //add flag to list
     const flag = document.createElement("img")
     flag.src = country.flag
     flag.alt = `${country.name}'s flag`
-    li.append(flag)
+    card.append(flag)
+
+    const infoDiv = document.createElement("div")
+    infoDiv.classList.add("infoDiv")
+
+    const info = `
+        Capital: ${country.capital}
+        <br/>
+        Currency: ${country.currencies[0].name}
+        <br/>
+        Population: ${country.population}
+        <br/>
+        Bordering Countries: ${country.borders}
+    `
+    infoDiv.innerHTML = info
+    card.append(infoDiv)
+
     console.log(country)
     main.append(countryDiv)
 }
