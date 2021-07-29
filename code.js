@@ -2,9 +2,16 @@ const COUNTRY_URL = "https://restcountries.eu/rest/v2/"
 
 //BREAK TIME UNTIL 4PM EASTERN
 
-const main = document.body
+const main = document.createElement("main")
+document.body.append(main)
+
+const countryDiv = document.createElement("div")
+countryDiv.classList.add("countryDiv")
+
+
 const countryList = document.createElement("ul")
-main.append(countryList)
+countryDiv.append(countryList)
+
 
 const displayCountry = function (country){
     const li = document.createElement("li")
@@ -18,6 +25,7 @@ const displayCountry = function (country){
     flag.alt = `${country.name}'s flag`
     li.append(flag)
     console.log(country)
+    main.append(countryDiv)
 }
 
 const getAllCountries = function () {
@@ -45,10 +53,10 @@ const handleClick = function (event){
 
     //search API for input value
     let search_url = `${COUNTRY_URL}name/${input.value}`
-
+    countryList.innerHTML = ""
     fetch(search_url)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => data.forEach(displayCountry))
 
     //clear the search box
     input.value = ""
