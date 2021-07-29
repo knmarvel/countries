@@ -44,9 +44,11 @@ const handleClick = function (event){
     console.log(input.value)
 
     //search API for input value
-    let search_url = COUNTRY_URL + `/name/${input.value}`
+    let search_url = `${COUNTRY_URL}name/${input.value}`
 
-    
+    fetch(search_url)
+        .then(response => response.json())
+        .then(data => console.log(data))
 
     //clear the search box
     input.value = ""
